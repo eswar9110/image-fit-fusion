@@ -29,43 +29,78 @@ const ClothingCatalog = ({ onClothingSelect, selectedClothing }: ClothingCatalog
       id: '1',
       name: 'Classic White Shirt',
       category: 'shirts',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop',
       price: '$49.99'
     },
     {
       id: '2',
       name: 'Denim Button-Up',
       category: 'shirts',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop',
       price: '$69.99'
     },
     {
       id: '3',
-      name: 'Casual Hoodie',
-      category: 'hoodies',
-      image: '/placeholder.svg',
-      price: '$79.99'
+      name: 'Striped Casual Shirt',
+      category: 'shirts',
+      image: 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=400&h=400&fit=crop',
+      price: '$55.99'
     },
     {
       id: '4',
-      name: 'Designer Saree',
-      category: 'sarees',
-      image: '/placeholder.svg',
-      price: '$129.99'
+      name: 'Casual Gray Hoodie',
+      category: 'hoodies',
+      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop',
+      price: '$79.99'
     },
     {
       id: '5',
-      name: 'Summer Dress',
-      category: 'dresses',
-      image: '/placeholder.svg',
+      name: 'Black Pullover Hoodie',
+      category: 'hoodies',
+      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop',
       price: '$89.99'
     },
     {
       id: '6',
-      name: 'Formal Shirt',
-      category: 'shirts',
-      image: '/placeholder.svg',
-      price: '$59.99'
+      name: 'Designer Silk Saree',
+      category: 'sarees',
+      image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=400&fit=crop',
+      price: '$129.99'
+    },
+    {
+      id: '7',
+      name: 'Traditional Red Saree',
+      category: 'sarees',
+      image: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=400&fit=crop',
+      price: '$149.99'
+    },
+    {
+      id: '8',
+      name: 'Elegant Blue Saree',
+      category: 'sarees',
+      image: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=400&fit=crop',
+      price: '$139.99'
+    },
+    {
+      id: '9',
+      name: 'Summer Floral Dress',
+      category: 'dresses',
+      image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=400&fit=crop',
+      price: '$89.99'
+    },
+    {
+      id: '10',
+      name: 'Elegant Black Dress',
+      category: 'dresses',
+      image: 'https://images.unsplash.com/photo-1566479179817-c0398156c2f7?w=400&h=400&fit=crop',
+      price: '$109.99'
+    },
+    {
+      id: '11',
+      name: 'Casual Midi Dress',
+      category: 'dresses',
+      image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&h=400&fit=crop',
+      price: '$79.99'
     }
   ];
 
@@ -85,7 +120,7 @@ const ClothingCatalog = ({ onClothingSelect, selectedClothing }: ClothingCatalog
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            {category.name} ({category.count})
+            {category.name} ({filteredItems.length})
           </button>
         ))}
       </div>
@@ -106,6 +141,10 @@ const ClothingCatalog = ({ onClothingSelect, selectedClothing }: ClothingCatalog
               src={item.image}
               alt={item.name}
               className="w-full h-32 object-cover rounded-t-lg"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/placeholder.svg';
+              }}
             />
             <div className="p-3">
               <h3 className="font-semibold text-sm text-slate-800 truncate">{item.name}</h3>

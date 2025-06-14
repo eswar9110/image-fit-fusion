@@ -22,6 +22,9 @@ const TryOnPreview = ({ originalPhoto, tryOnResult, isProcessing }: TryOnPreview
     );
   }
 
+  // Mock try-on result - in real implementation, this would be the processed image from backend
+  const mockTryOnResult = 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=800&fit=crop';
+
   return (
     <div className="space-y-4">
       {/* Before/After Toggle */}
@@ -29,7 +32,7 @@ const TryOnPreview = ({ originalPhoto, tryOnResult, isProcessing }: TryOnPreview
         <div className="flex justify-center">
           <div className="bg-slate-100 rounded-lg p-1 flex">
             <button className="px-4 py-2 rounded-md bg-white shadow-sm text-sm font-medium">
-              Before/After
+              Try-On Result
             </button>
           </div>
         </div>
@@ -49,9 +52,13 @@ const TryOnPreview = ({ originalPhoto, tryOnResult, isProcessing }: TryOnPreview
           <div className="grid grid-cols-1 gap-4">
             <div className="relative">
               <img
-                src={tryOnResult}
+                src={mockTryOnResult}
                 alt="Try-on result"
                 className="w-full h-96 object-cover rounded-xl shadow-lg"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = originalPhoto;
+                }}
               />
               <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                 Virtual Try-On Result
@@ -67,6 +74,9 @@ const TryOnPreview = ({ originalPhoto, tryOnResult, isProcessing }: TryOnPreview
             />
             <div className="absolute top-4 left-4 bg-slate-800 text-white px-3 py-1 rounded-full text-sm font-medium">
               Original Photo
+            </div>
+            <div className="absolute bottom-4 left-4 right-4 bg-black/50 text-white p-3 rounded-lg">
+              <p className="text-sm">Select a clothing item and click "Try On Outfit" to see how it looks on you!</p>
             </div>
           </div>
         )}
